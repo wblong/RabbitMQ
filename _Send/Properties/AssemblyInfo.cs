@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("RabbitMQ")]
+[assembly: AssemblyTitle("_Send")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RabbitMQ")]
+[assembly: AssemblyProduct("_Send")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("171132f5-a0cd-4ad2-b8b0-2f86555082bf")]
+[assembly: Guid("4c02c583-0a06-44a3-b866-20236ebf9cb3")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
