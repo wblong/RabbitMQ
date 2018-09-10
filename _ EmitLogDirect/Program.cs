@@ -5,11 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 
-namespace _EmitLog
+namespace __EmitLogDirect
 {
-    /// <summary>
-    /// how to deliver the same message to many consumers
-    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -18,19 +15,21 @@ namespace _EmitLog
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                //exchange
-                channel.ExchangeDeclare(exchange: "logs", type: "fanout");
-                var message = GetMessage(args);
+                channel.ExchangeDeclare(exchange: "direct_logs", type: "direct");
+
+                var severity = args.Length > 0 ? args[0] : "Info";
+
+                var message = args.Length > 1 ? String.Join(" ", args.Skip(1).ToArray()) : "Hello World!";
+
                 var body = Encoding.UTF8.GetBytes(message);
-                channel.BasicPublish(exchange: "logs",routingKey:"",basicProperties:null,body:body);
-                Console.WriteLine("[x] Send {0}", message);
+
+                channel.BasicPublish(exchange: "direct_logs", routingKey: severity, basicProperties: null, body: body);
+
+                Console.WriteLine("[x] Send {0}:{1}", severity, message);
+
             }
             Console.WriteLine("Press [enter] to exit.");
-
-        }
-        private static string GetMessage(string [] args)
-        {
-            return args.Length > 0 ? String.Join(" ", args) : "Hello World!";
+            Console.ReadLine();
         }
     }
 }
