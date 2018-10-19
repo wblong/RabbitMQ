@@ -16,15 +16,17 @@ namespace _Receive
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare("hello", false, false, false, null);
+                channel.QueueDeclare("task_queue", true, false, false, null);
                 Console.WriteLine("[*] Waiting for message.");
                 var consume = new EventingBasicConsumer(channel);
                 consume.Received += (model, ea) => {
                     var body = ea.Body;
                     var message = Encoding.UTF8.GetString(body);
                     Console.WriteLine($"Received a message:{message}");
+                    System.Threading.Thread.Sleep(1000);
+                    Console.WriteLine($"------------------------------{System.DateTime.Now.ToString()}----------------------------------");
                 };
-                channel.BasicConsume(queue: "hello", autoAck: true, consumer: consume);
+                channel.BasicConsume(queue: "task_queue", autoAck: true, consumer: consume);
                 Console.WriteLine("Press [enter] to exit!");
                 Console.ReadLine();
             }
